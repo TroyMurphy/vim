@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/troymurphy/.virtualenvs/crm15/src/asymmetricbase'
+let g:netrw_dirhist_2='/Users/troymurphy/.ssh'
+let g:netrw_dirhist_3='/Users/troymurphy/Development/roofingcrm/project/prodplans/multi/views/mixins'
+let g:netrw_dirhist_4='/Users/troymurphy/Development/roofingcrm/project/orders/multi/views/mixins'
+let g:netrw_dirhist_5='/Users/troymurphy/Development/roofingcrm/project/prodplans/multi/views/mixins'
+let g:netrw_dirhist_6='/Users/troymurphy/.vim/autoload'
+let g:netrw_dirhist_7='/Users/troymurphy/.atom/packages'
+let g:netrw_dirhist_8='/Users/troymurphy/Development/roofingcrm/project/invoices'
