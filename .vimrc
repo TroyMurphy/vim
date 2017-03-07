@@ -1,17 +1,46 @@
 " load pathogen
 execute pathogen#infect()
 
+" preference key remappings
+let mapleader = "\<Space>"
+"remap escape and reset insert mode
+inoremap jk <ESC>
+
 " general settings
 filetype plugin on
 filetype plugin indent on
 syntax on
 set nocompatible
+set scrolloff=3
+set autoindent
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set relativenumber
+set undofile
+
+nnoremap / /\v
+vnoremap / /\v
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><Space> :noh<cr>
+
 ""set spell spelllang=en_us
 set encoding=utf-8
 
-" preference key remappings
-let mapleader = "\<Space>"
-inoremap jk <ESC>
+
+"Coming Home To Vim Stuff
+nnoremap <leader>a :Ack
 
 " set default preferences
 set number
@@ -29,6 +58,13 @@ map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
+" Set other leader keys
+nnoremap <leader><S-E> :Explore<CR>
+
+" Set quick vimrc access
+nmap <leader>ve :tabe $MYVIMRC<CR>
+nmap <leader>vs :source $MYVIMRC<CR>
+
 " Set theme defaults for terminal and macvim
 if has('gui_running')
     colors zenburn
@@ -43,8 +79,14 @@ endif
 highlight NonText guifg=#468bba
 highlight SpecialKey guifg=#468bba
 
-let g:ctrlp_map = '<c-p>'
+" Keymaps for ctrlp plugin
+let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" Keymaps for snipMate plugin
+imap <C-Tab> <Plug>snipMateNextOrTrigger
+smap <C-Tab> <plug>snipMateNextOrTrigger
+vmap <C-Tab> <plug>snipMateNextOrTrigger
 
 " python with virtualenv support
 py << EOF
@@ -61,6 +103,9 @@ EOF
 let g:ycm_server_python_interpreter='python3'
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Python-Mode settings
+let g:pymode_folding = 0
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>

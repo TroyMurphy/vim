@@ -1,11 +1,10 @@
-snippet pdb
+snippet djpdb
 	import pdb;pdb.set_trace()
-	${0}
 
 snippet djtestimport
 	from django.test import TestCase
 	from rest_framework import status
-		
+
 	from ${1:filename}.models import ${2:modelname}
 	from $1.views import $2ViewSet
 	from $1.factories import $2Factory
@@ -13,7 +12,7 @@ snippet djtestimport
 	from shared.tests import jwt_setUp
 	import logging
 	import json
-		
+
 	logger = logging.getLogger('django_test')
 
 	${3}
@@ -23,13 +22,13 @@ snippet djtestmodel
 		def setUp(self):
 			self.client = jwt_setUp()
 			$1.objects.all().delete()
-	
+
 		def test_api_post_$1(self):
 			${4}
 			${2:objname} = $1Factory.build()
 			$2_srz = $1Serializer($2)
 			self.assertEqual($1.objects.count(), 0)
-		
+
 			response = self.client.post(
 			    '/api/v1/${3:url}/',
 			    json.dumps($2_srz.data),
