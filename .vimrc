@@ -11,6 +11,7 @@ filetype plugin on
 filetype plugin indent on
 syntax on
 set nocompatible
+set nobackup
 set scrolloff=3
 set autoindent
 set showmode
@@ -20,14 +21,15 @@ set wildmenu
 set wildmode=list:longest
 set visualbell
 set cursorline
+set colorcolumn=80
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
 set relativenumber
 set undofile
+set ttimeoutlen=50
 
-nnoremap / /\v
 vnoremap / /\v
 set gdefault
 set incsearch
@@ -58,17 +60,31 @@ map <leader>es :sp %%
 map <leader>ev :vsp %%
 map <leader>et :tabe %%
 
+
 " Set other leader keys
-nnoremap <leader><S-E> :Explore<CR>
+
+nnoremap <leader><S-E> :Texplore .<CR>
+" Bubble text up
+nmap <leader>k ddkP
+nmap <leader>j ddp
+" Bubble multiple lines
+vmap <leader>k xkP`[V`]
+vmap <leader>j xp`[V`]
+
 
 " Set quick vimrc access
 nmap <leader>ve :tabe $MYVIMRC<CR>
 nmap <leader>vs :source $MYVIMRC<CR>
 
+
 " Set theme defaults for terminal and macvim
 if has('gui_running')
-    colors zenburn
+    "
+    " colors zenburn
+    colorscheme solarized
+    set background=dark
     set guifont=Consolas:h14
+    set antialias
 else
     set background=dark
     let g:solarized_contrast="high"
@@ -85,24 +101,40 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " Keymaps for snipMate plugin
 imap <C-Tab> <Plug>snipMateNextOrTrigger
-smap <C-Tab> <plug>snipMateNextOrTrigger
-vmap <C-Tab> <plug>snipMateNextOrTrigger
+smap <C-Tab> <Plug>snipMateNextOrTrigger
+vmap <C-Tab> <Plug>snipMateNextOrTrigger
 
-" python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+" Keymaps for Tsuquyomi
+inoremap <C-Space> <C-x><C-o>
+nnoremap <leader>o :TsuImport<CR>
+nnoremap <F3> :TsuDefinition<CR>
 
-" YCM config https://github.com/Valloric/YouCompleteMe/issues/2197
-" vim compiles with only python2 support
-let g:ycm_server_python_interpreter='python3'
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Syntastic settings
+set statusline+=%#warningmg#
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
+
+
+" Airline
+let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Airline Symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
 
 " Python-Mode settings
 let g:pymode_folding = 0
@@ -111,3 +143,14 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" functions
+command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
