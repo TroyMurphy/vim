@@ -1,4 +1,4 @@
-" load pathogen
+"load pathogen
 execute pathogen#infect()
 
 " preference key remappings
@@ -10,6 +10,7 @@ inoremap jk <ESC>
 filetype plugin on
 filetype plugin indent on
 syntax on
+set guifont=Inconsolata\ for\ Powerline:h14
 set nocompatible
 set nobackup
 set scrolloff=3
@@ -30,7 +31,6 @@ set relativenumber
 set undofile
 set ttimeoutlen=50
 
-vnoremap / /\v
 set gdefault
 set incsearch
 set showmatch
@@ -42,7 +42,7 @@ set encoding=utf-8
 
 
 "Coming Home To Vim Stuff
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack 
 
 " set default preferences
 set number
@@ -83,12 +83,10 @@ if has('gui_running')
     " colors zenburn
     colorscheme solarized
     set background=dark
-    set guifont=Consolas:h14
     set antialias
 else
-    set background=dark
-    let g:solarized_contrast="high"
     colorscheme solarized
+    set background=dark
     set antialias
 endif
 
@@ -109,6 +107,9 @@ inoremap <C-Space> <C-x><C-o>
 nnoremap <leader>o :TsuImport<CR>
 nnoremap <F3> :TsuDefinition<CR>
 
+nnoremap <leader>ss :mks! ~/jsystems.vim<CR>
+nnoremap <leader>ls :so ~/jsystems.vim<CR>
+
 " Syntastic settings
 set statusline+=%#warningmg#
 set statusline+=%*
@@ -127,15 +128,6 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-" Airline Symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
-
 " Python-Mode settings
 let g:pymode_folding = 0
 
@@ -153,4 +145,12 @@ function! QuickfixFilenames()
     let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
   endfor
   return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
+endfunction
+
+function! DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
 endfunction
