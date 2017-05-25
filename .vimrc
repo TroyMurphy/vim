@@ -99,6 +99,10 @@ highlight SpecialKey guifg=#468bba
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_by_filename=1
+
+
 " Keymaps for snipMate plugin
 imap <C-Tab> <Plug>snipMateNextOrTrigger
 smap <C-Tab> <Plug>snipMateNextOrTrigger
