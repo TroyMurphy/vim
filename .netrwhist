@@ -1,6 +1,6 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/jaysondev/Devel/jayson_systems/client/src/app/secure'
-let g:netrw_dirhist_2='/Users/jaysondev/Devel/jayson_systems/client/src/app/secure/contacts'
-let g:netrw_dirhist_3='/Users/jaysondev/Devel/jayson_systems/client/src/app/secure/contacts/site-contact'
-let g:netrw_dirhist_4='/Users/jaysondev/Devel/jayson_systems/client/src/app'
+let g:netrw_dirhist_1='/Users/jaysondev/Devel/jayson_systems/client/src/app/_forms/site-contact-form'
+let g:netrw_dirhist_2='/Users/jaysondev/Devel/jayson_systems/client/src/app/_forms'
+let g:netrw_dirhist_3='/Users/jaysondev/Devel/jayson_systems/client/src/app'
+let g:netrw_dirhist_4='/Users/jaysondev/Devel/jayson_systems/client/src/app/_services'

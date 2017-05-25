@@ -12,9 +12,11 @@ filetype plugin indent on
 syntax on
 set guifont=Inconsolata\ for\ Powerline:h14
 set nocompatible
+set noswapfile
 set nobackup
 set scrolloff=3
 set autoindent
+set smartindent
 set showmode
 set showcmd
 set hidden
@@ -31,7 +33,6 @@ set relativenumber
 set undofile
 set ttimeoutlen=50
 
-set gdefault
 set incsearch
 set showmatch
 set hlsearch
@@ -53,7 +54,7 @@ set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
 nmap <leader>l :set list!<CR>
 set listchars=tab:▸\ ,eol:¬
 
-" Set new tab leader keys
+" Open sibling buffer quickly
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 map <leader>ew :e %%
 map <leader>es :sp %%
@@ -81,6 +82,7 @@ nmap <leader>vs :source $MYVIMRC<CR>
 if has('gui_running')
     "
     " colors zenburn
+    set macmeta
     colorscheme solarized
     set background=dark
     set antialias
@@ -106,9 +108,12 @@ vmap <C-Tab> <Plug>snipMateNextOrTrigger
 inoremap <C-Space> <C-x><C-o>
 nnoremap <leader>o :TsuImport<CR>
 nnoremap <F3> :TsuDefinition<CR>
+let g:tsuquyomi_shortest_import_path = 1
 
-nnoremap <leader>ss :mks! ~/jsystems.vim<CR>
-nnoremap <leader>ls :so ~/jsystems.vim<CR>
+nnoremap <leader>ss1 :mks! ~/jsys_session1.vim<CR>
+nnoremap <leader>sl1 :so ~/jsys_session1.vim<CR>
+nnoremap <leader>ss2 :mks! ~/jsys_session2.vim<CR>
+nnoremap <leader>sl2 :so ~/jsys_session2.vim<CR>
 
 " Syntastic settings
 set statusline+=%#warningmg#
