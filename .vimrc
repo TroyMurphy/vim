@@ -7,6 +7,7 @@ let mapleader = "\<Space>"
 inoremap jk <ESC>
 
 " general settings
+set directory=~/.vim/swapfiles//
 filetype plugin on
 filetype plugin indent on
 syntax on
@@ -21,7 +22,7 @@ set showmode
 set showcmd
 set hidden
 set wildmenu
-set wildmode=list:longest
+set wildmode=longest,list
 set visualbell
 set cursorline
 set colorcolumn=80
@@ -37,6 +38,7 @@ set incsearch
 set showmatch
 set hlsearch
 nnoremap <leader><Space> :noh<cr>
+nnoremap <leader>n //<CR>
 
 ""set spell spelllang=en_us
 set encoding=utf-8
@@ -98,9 +100,14 @@ highlight SpecialKey guifg=#468bba
 " Keymaps for ctrlp plugin
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
-
-let g:ctrlp_working_path_mode='ra'
+let g:ctrlp_working_path_mode='rc'
 let g:ctrlp_by_filename=1
+let g:ctrlp_max_depth=40
+
+let g:ctrlp_custom_ignore = {
+    \ 'dir': 'node_modules\|git',
+    \ 'file': '\v\.(js)$',
+    \ }
 
 
 " Keymaps for snipMate plugin
@@ -125,7 +132,7 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes':   [],'passive_filetypes': [] }
 
@@ -138,12 +145,29 @@ if !exists('g:airline_symbols')
 endif
 
 " Python-Mode settings
-let g:pymode_folding = 0
+set foldmethod=indent
+set foldlevel=99
+let g:pymode_folding = 1
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:vimpy_prompt_resolve = 1
 
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
 
 " functions
 command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
