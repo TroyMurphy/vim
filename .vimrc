@@ -104,7 +104,7 @@ let g:ctrlp_by_filename=0
 let g:ctrlp_max_depth=40
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir': 'coverage\|node_modules\|git',
+    \ 'dir': 'client\\coverage\|node_modules\|git',
     \ 'file': '\v\.(js)$',
     \ }
 
