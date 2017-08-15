@@ -9,7 +9,6 @@ inoremap jk <ESC>
 " general settings
 set directory=~/.vim/swapfiles//
 filetype plugin on
-filetype plugin indent on
 syntax on
 set guifont=Inconsolata\ for\ Powerline:h14
 set nocompatible
@@ -101,19 +100,14 @@ highlight SpecialKey guifg=#468bba
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode='rc'
-let g:ctrlp_by_filename=1
+let g:ctrlp_by_filename=0
 let g:ctrlp_max_depth=40
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir': 'node_modules\|git',
+    \ 'dir': 'coverage\|node_modules\|git',
     \ 'file': '\v\.(js)$',
     \ }
 
-
-" Keymaps for snipMate plugin
-imap <C-Tab> <Plug>snipMateNextOrTrigger
-smap <C-Tab> <Plug>snipMateNextOrTrigger
-vmap <C-Tab> <Plug>snipMateNextOrTrigger
 
 " Keymaps for Tsuquyomi
 inoremap <C-Space> <C-x><C-o>
@@ -144,6 +138,19 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+"UltiSnipsConfig
+let g:UltiSnipsSnippetsDir = '~/.vim/ultiSnips/'
+let g:UltiSnipsEditSplit = 'vertical'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+let g:UltiSnipsExpandTrigger           = '<tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
 " Python-Mode settings
 set foldmethod=indent
 set foldlevel=99
@@ -158,32 +165,18 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"Python Mode
+let g:pymode_python = 'python3'
+let g:pymode_rope_goto_definition_bind = "F5"
+
 "python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
+"py << EOF
+"import os
+"import sys
+"if 'VIRTUAL_ENV' in os.environ:
+"  project_base_dir = os.environ['VIRTUAL_ENV']
+"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"  execfile(activate_this, dict(__file__=activate_this))
+"EOF
 
-
-" functions
-command! -nargs=0 -bar Qargs execute 'args' QuickfixFilenames()
-function! QuickfixFilenames()
-  " Building a hash ensures we get each buffer only once
-  let buffer_numbers = {}
-  for quickfix_item in getqflist()
-    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-  endfor
-  return join(map(values(buffer_numbers), 'fnameescape(v:val)'))
-endfunction
-
-function! DeleteHiddenBuffers()
-    let tpbl=[]
-    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-        silent execute 'bwipeout' buf
-    endfor
-endfunction
+filetype plugin indent on
