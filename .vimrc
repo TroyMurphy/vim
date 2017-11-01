@@ -1,15 +1,17 @@
 "load pathogen
-execute pathogen#infect()
+filetype off
+call pathogen#infect()
+call pathogen#helptags()
 
-" preference key remappings
-let mapleader = "\<Space>"
-"remap escape and reset insert mode
-inoremap jk <ESC>
-
-" general settings
-set directory=~/.vim/swapfiles//
+filetype plugin indent on
 filetype plugin on
 syntax on
+
+" preference key remappings
+inoremap jk <ESC>
+let mapleader = "\<Space>"
+
+" general settings
 set guifont=Inconsolata\ for\ Powerline:h14
 set nocompatible
 set noswapfile
@@ -23,7 +25,7 @@ set hidden
 set wildmenu
 set wildmode=longest,list
 set visualbell
-set cursorline
+set nocursorline
 set colorcolumn=80
 set ttyfast
 set ruler
@@ -32,6 +34,9 @@ set laststatus=2
 set relativenumber
 set undofile
 set ttimeoutlen=50
+if $COLORTERM == 'gnome-terminal'
+    set t_Co="256"
+endif
 
 set incsearch
 set showmatch
@@ -44,7 +49,7 @@ set encoding=utf-8
 
 
 "Coming Home To Vim Stuff
-nnoremap <leader>a :Ack 
+nnoremap <leader>a :Ack
 
 " set default preferences
 set number
@@ -87,6 +92,8 @@ if has('gui_running')
     colorscheme solarized
     set background=dark
     set antialias
+    set cursorline
+   " hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
 else
     colorscheme solarized
     set background=dark
@@ -104,7 +111,7 @@ let g:ctrlp_by_filename=0
 let g:ctrlp_max_depth=40
 
 let g:ctrlp_custom_ignore = {
-    \ 'dir': 'client\\coverage\|node_modules\|git',
+    \ 'dir': 'node_modules\|git\|coverage',
     \ 'file': '\v\.(js)$',
     \ }
 
@@ -165,18 +172,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"Python Mode
+""Python Mode
+let g:pymode_lint_cwindow = 1
+let g:pymode_lint_message = 1
 let g:pymode_python = 'python3'
-let g:pymode_rope_goto_definition_bind = "F5"
-
-"python with virtualenv support
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"  execfile(activate_this, dict(__file__=activate_this))
-"EOF
-
-filetype plugin indent on
+nnoremap <C-c>l :PymodeLintAuto<CR>

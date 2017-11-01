@@ -1,6 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/jaysondev/Devel/jayson_systems/client/src/app'
-let g:netrw_dirhist_2='/Users/jaysondev/Devel/jayson_systems/client/src/app/secure/scopes/scope-card'
-let g:netrw_dirhist_3='/Users/jaysondev/Devel/jayson_systems/server'
-let g:netrw_dirhist_4='/Users/jaysondev/Devel/jayson_systems/server/items'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/jaysondev/Devel/roofingcrm/project/shared'
+let g:netrw_dirhist_2='/Users/jaysondev/Devel/roofingcrm/project/shared/_models'
+let g:netrw_dirhist_3='/Users/jaysondev/Devel/roofingcrm/project/leads/forms'
+let g:netrw_dirhist_4='/Users/jaysondev/Devel/roofingcrm'
+let g:netrw_dirhist_5='/Users/jaysondev/Devel/roofingcrm/project'
+let g:netrw_dirhist_6='/Users/jaysondev/Devel/roofingcrm/project/leads'
+let g:netrw_dirhist_7='/Users/jaysondev/Devel/roofingcrm/project/leads/single'
+let g:netrw_dirhist_8='/Users/jaysondev/Devel/roofingcrm/project/leads/single/views'
