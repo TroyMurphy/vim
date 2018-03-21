@@ -1,0 +1,109 @@
+filetype plugin indent on
+filetype plugin on
+syntax on
+
+" preference key remappings
+inoremap jk <ESC>
+let mapleader = "\<Space>"
+
+" general settings
+set guifont=Inconsolata\ for\ Powerline:h14
+set nocompatible
+set noswapfile
+set nobackup
+set scrolloff=3
+set autoindent
+set smartindent
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=longest,list
+set visualbell
+set nocursorline
+set colorcolumn=80
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set relativenumber
+set undofile
+set ttimeoutlen=50
+if $COLORTERM == 'gnome-terminal'
+    set t_Co="256"
+endif
+
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><Space> :noh<cr>
+nnoremap <leader>n //<CR>
+
+""set spell spelllang=en_us
+set encoding=utf-8
+
+
+"Coming Home To Vim Stuff
+nnoremap <leader>a :Ack
+
+" set default preferences
+set number
+set hidden
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
+
+" Set hidden chars toggle
+nmap <leader>l :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+
+" Open sibling buffer quickly
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
+
+
+" Set other leader keys
+
+nnoremap <leader><S-E> :Texplore .<CR>
+" Bubble text up
+nmap <leader>k ddkP
+nmap <leader>j ddp
+" Bubble multiple lines
+vmap <leader>k xkP`[V`]
+vmap <leader>j xp`[V`]
+
+
+" Set quick vimrc access
+nmap <leader>ve :tabe $MYVIMRC<CR>
+nmap <leader>vs :source $MYVIMRC<CR>
+
+" Set theme defaults for terminal and macvim
+if has('gui_running')
+    "
+    " colors zenburn
+    set macmeta
+    colorscheme solarized
+    set background=dark
+    set antialias
+    set cursorline
+   " hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
+else
+    colorscheme solarized
+    set background=dark
+    set antialias
+endif
+
+highlight NonText guifg=#468bba
+highlight SpecialKey guifg=#468bba
+
+nnoremap <leader>ss1 :mks! ~/jsys_session1.vim<CR>
+nnoremap <leader>sl1 :so ~/jsys_session1.vim<CR>
+nnoremap <leader>ss2 :mks! ~/jsys_session2.vim<CR>
+nnoremap <leader>sl2 :so ~/jsys_session2.vim<CR>
+
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
