@@ -177,3 +177,6 @@ let g:pymode_lint_cwindow = 1
 let g:pymode_lint_message = 1
 let g:pymode_python = 'python3'
 nnoremap <C-c>l :PymodeLintAuto<CR>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
