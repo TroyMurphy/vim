@@ -78,25 +78,6 @@ vmap <leader>j xp`[V`]
 nmap <leader>ve :tabe $MYVIMRC<CR>
 nmap <leader>vs :source $MYVIMRC<CR>
 
-" Set theme defaults for terminal and macvim
-if has('gui_running')
-    "
-    " colors zenburn
-    set macmeta
-    colorscheme solarized
-    set background=dark
-    set antialias
-    set cursorline
-   " hi CursorLine cterm=NONE ctermbg=darkblue ctermfg=white guibg=darkblue ctermfg=white
-else
-    colorscheme solarized
-    set background=dark
-    set antialias
-endif
-
-highlight NonText guifg=#468bba
-highlight SpecialKey guifg=#468bba
-
 nnoremap <leader>ss1 :mks! ~/jsys_session1.vim<CR>
 nnoremap <leader>sl1 :so ~/jsys_session1.vim<CR>
 nnoremap <leader>ss2 :mks! ~/jsys_session2.vim<CR>
