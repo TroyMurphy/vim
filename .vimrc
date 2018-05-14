@@ -85,6 +85,7 @@ nmap <leader>vs :source $MYVIMRC<CR>
 
 
 " Set theme defaults for terminal and macvim
+let g:solarized_termcolors=256
 if has('gui_running')
     "
     " colors zenburn
